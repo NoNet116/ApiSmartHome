@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiSmartHome", "ApiSmartHome\ApiSmartHome.csproj", "{06E06B4E-3B6F-4FAB-AA0D-F0873D2C3D11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiSmartHome.Contracts", "ApiSmartHome.Contracts\ApiSmartHome.Contracts.csproj", "{3BA7D2C0-C5FD-4462-8C19-4B4064FE523A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiSmartHome.Data", "ApiSmartHome.Data\ApiSmartHome.Data.csproj", "{88438650-0629-4F2B-8999-AA966EDCC614}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06E06B4E-3B6F-4FAB-AA0D-F0873D2C3D11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06E06B4E-3B6F-4FAB-AA0D-F0873D2C3D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06E06B4E-3B6F-4FAB-AA0D-F0873D2C3D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06E06B4E-3B6F-4FAB-AA0D-F0873D2C3D11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BA7D2C0-C5FD-4462-8C19-4B4064FE523A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BA7D2C0-C5FD-4462-8C19-4B4064FE523A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BA7D2C0-C5FD-4462-8C19-4B4064FE523A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BA7D2C0-C5FD-4462-8C19-4B4064FE523A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88438650-0629-4F2B-8999-AA966EDCC614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88438650-0629-4F2B-8999-AA966EDCC614}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88438650-0629-4F2B-8999-AA966EDCC614}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88438650-0629-4F2B-8999-AA966EDCC614}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
