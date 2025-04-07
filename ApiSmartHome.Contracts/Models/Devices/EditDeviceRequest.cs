@@ -11,7 +11,7 @@ namespace ApiSmartHome.Contracts.Models.Devices
     /// </summary>
     public class EditDeviceRequest
     {
-        public string NewRoom { get; set; }
+        public Guid NewRoomId { get; set; }
         public string NewName { get; set; }
         public string NewSerial { get; set; }
     }

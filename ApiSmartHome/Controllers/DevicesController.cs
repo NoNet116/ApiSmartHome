@@ -1,6 +1,7 @@
 ﻿using ApiSmartHome.Contracts.Models.Devices;
 using ApiSmartHome.Contracts.Models.Rooms;
 using ApiSmartHome.Data.Models;
+using ApiSmartHome.Data.Queries;
 using ApiSmartHome.Data.Repository;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -68,6 +69,32 @@ namespace ApiSmartHome.Controllers
             return StatusCode(201, $"Устройство {request.Name} добавлено. Идентификатор: {newDevice.Id}");
         }
 
+        /// <summary>
+        /// Обновление существующего устройства
+        /// </summary>
+        [HttpPatch]
+        [Route("{id}")]
+        public async Task<IActionResult> Edit(
+            [FromRoute] Guid id,
+            [FromBody] EditDeviceRequest request)
+        {
+            var room = await _rooms.GetRoomById(request.NewRoomId);
+            if (room == null)
+                return StatusCode(400, $"Ошибка: Комната не подключена. Сначала подключите комнату!");
+
+            var device = await _devices.GetDeviceById(id);
+            if (device == null)
+                return StatusCode(400, $"Ошибка: Устройство с идентификатором {id} не существует.");
+
+            var withSameName = await _devices.GetDeviceBySN(request.NewSerial);
+            if (withSameName != null)
+                return StatusCode(400, $"Ошибка: Устройство с серийным номером {request.NewSerial} уже существует.");
+
+            await _devices.UpdateDevice(device, room, new UpdateDeviceQuery(request.NewName, request.NewSerial)
+            );
+
+            return StatusCode(200, $"Устройство обновлено! Имя - {device.Name}, Серийный номер - {device.SerialNumber},  Комната подключения - {device.Room.Name}");
+        }
 
     }
 }

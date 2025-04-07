@@ -16,6 +16,7 @@ namespace ApiSmartHome.Data
 
         public HomeApiContext(DbContextOptions<HomeApiContext> options) : base(options)
         {
+           // Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
