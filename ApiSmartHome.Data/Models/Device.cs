@@ -18,6 +18,7 @@ namespace ApiSmartHome.Data.Models
         public string SerialNumber { get; set; }
         public int CurrentVolts { get; set; }
         public bool GasUsage { get; set; }
+        public string Location { get; set; }
         public Guid RoomId { get; set; }
         public Room Room { get; set; }
     }
