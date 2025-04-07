@@ -18,5 +18,6 @@ namespace ApiSmartHome.Contracts.Models.Users
         public string LastName { get; set; } = user.LastName;
         public string Role { get; set; } = user.Role.Name;
     }
+    
 
 }

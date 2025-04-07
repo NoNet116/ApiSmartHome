@@ -9,7 +9,8 @@ namespace ApiSmartHome.Data.Repository
 {
     public class UserRepository : IUserRepository
     {
-        public async Task<User[]> GetUser()
+      
+        public async Task<User[]> GetUsers()
         {
             var result = new User[] { new User()
             {                

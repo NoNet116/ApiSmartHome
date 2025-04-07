@@ -1,4 +1,5 @@
 using ApiSmartHome.Configuration;
+using ApiSmartHome.Data.Models;
 using ApiSmartHome.Data.Repository;
 using ApiSmartHome.MappingProfiles;
 
@@ -18,8 +19,8 @@ builder.Logging.AddEventSourceLogger();      // Логируем в системные события Win
 // Добавление настроек из файла конфигурации
 builder.Services.AddOptions<HomeOptions>()
     .Bind(builder.Configuration)
-    .ValidateDataAnnotations()
-.ValidateOnStart();
+    .ValidateDataAnnotations() // Можно добавить валидацию с аттрибутами данных, если нужно
+.ValidateOnStart(); // Опционально: проверка на ошибки в данных при старте приложения
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 

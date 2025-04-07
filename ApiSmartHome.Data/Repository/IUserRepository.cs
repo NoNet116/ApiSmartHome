@@ -3,6 +3,6 @@ namespace ApiSmartHome.Data.Repository
 {
     public interface IUserRepository
     {
-        Task<User[]> GetUser();
+        Task<User[]> GetUsers();
     }
 }

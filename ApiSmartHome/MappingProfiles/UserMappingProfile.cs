@@ -9,6 +9,7 @@ namespace ApiSmartHome.MappingProfiles
         public UserMappingProfile()
         {
             CreateMap<User, UserView>().ConstructUsing(v => new UserView(v));
+            
         }
     }
 }
