@@ -12,7 +12,10 @@ namespace ApiSmartHome.Data.Repository
     /// </summary>
     public interface IDeviceRepository
     {
+        Task<Device?> GetDeviceBySN(string serialNumber);
         Task<Device[]> GetDevices();
+
+        Task SaveDevice(Device device,Room room);
       
     }
 }

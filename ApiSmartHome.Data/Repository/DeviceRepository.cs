@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ApiSmartHome.Data.Repository
 {
@@ -17,6 +18,13 @@ namespace ApiSmartHome.Data.Repository
             _context = context;
         }
 
+        public async Task<Device?> GetDeviceBySN(string serialNumber)
+        {
+            return await _context.Devices
+            .Include(d => d.Room)
+                .Where(d => d.SerialNumber == serialNumber).FirstOrDefaultAsync();
+        }
+
         /// <summary>
         /// Выгрузить все устройства
         /// </summary>
@@ -25,6 +33,24 @@ namespace ApiSmartHome.Data.Repository
             return await _context.Devices
                 .Include(d => d.Room)
                 .ToArrayAsync();
+        }
+
+        /// <summary>
+        /// Добавить новое устройство
+        /// </summary>
+        public async Task SaveDevice(Device device, Room room)
+        {
+            // Привязываем новое устройство к соответствующей комнате перед сохранением
+            device.RoomId = room.Id;
+            device.Room = room;
+
+            // Добавляем в базу 
+            var entry = _context.Entry(device);
+            if (entry.State == EntityState.Detached)
+                await _context.Devices.AddAsync(device);
+
+            // Сохраняем изменения в базе 
+            await _context.SaveChangesAsync();
         }
     }
 }

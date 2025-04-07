@@ -31,8 +31,7 @@ namespace ApiSmartHome.MappingProfiles
         // Подключаем маппинг для Device
         private void AddDeviceMappings()
         {
-            CreateMap<AddDeviceRequest, Device>()
-                .ForMember(d => d.Location, opt => opt.MapFrom(r => r.RoomLocation));
+            CreateMap<AddDeviceRequest, Device>();
             CreateMap<Device, DeviceView>();
         }
 

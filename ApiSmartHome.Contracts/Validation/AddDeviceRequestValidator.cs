@@ -27,18 +27,9 @@ namespace ApiSmartHome.Contracts.Validation
                 .Must(v => v == 0 || v == 120 || v == 220)
                 .WithMessage("Только значения 0, 120 или 220 допустимы.");
             RuleFor(x => x.GasUsage).NotNull();
-            RuleFor(x => x.RoomLocation).NotEmpty()
-                .Must(BeSupported)
-                .WithMessage($"Please choose one of the following locations: {string.Join(", ", Values.ValidRooms)}");
+            RuleFor(x => x.RoomId).NotEmpty()
+                .WithMessage($"Please choose locations");
         }
 
-        /// <summary>
-        ///  Метод кастомной валидации для свойства location
-        /// </summary>
-        private bool BeSupported(string location)
-        {
-            // Проверим, содержится ли значение в списке допустимых
-            return Values.ValidRooms.Any(e => e == location);
-        }
     }
 }

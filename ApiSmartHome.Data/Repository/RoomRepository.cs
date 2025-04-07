@@ -1,11 +1,5 @@
 ﻿using ApiSmartHome.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiSmartHome.Data.Repository
 {
@@ -27,6 +21,11 @@ namespace ApiSmartHome.Data.Repository
             await _context.SaveChangesAsync();
         }
 
+        public async  Task<Room?> GetRoomById(Guid id)
+        {
+            return await _context.Rooms.Where(x => x.Id == id).FirstOrDefaultAsync();
+        }
+
         /// <summary>
         ///  Выгрузить все комнаты
         /// </summary>
@@ -35,7 +34,13 @@ namespace ApiSmartHome.Data.Repository
             return await _context.Rooms.ToArrayAsync();
         }
 
+        public async Task UpdateRoom(Room room)
+        {
+            ArgumentNullException.ThrowIfNull(room);
 
+            _context.Rooms.Update(room);
 
+            await _context.SaveChangesAsync();
+        }
     }
 }
