@@ -9,9 +9,18 @@ using Microsoft.Extensions.Options;
 
 namespace ApiSmartHome.Controllers
 {
+    /*
+     ControllerBase
+    Используется для Web API. Это облегчённый базовый класс контроллера.
+    Основные особенности:
+    *Нет поддержки Views (представлений).
+    *Используется только для REST API (JSON, XML и т.д.).
+    *Наследует: ControllerBase : ControllerContext
+     */
+
     [ApiController]
     [Route("[controller]")]
-    public class HomeController : Controller
+    public class HomeController : ControllerBase
     {
         private readonly ILogger<HomeController> _logger;
         private IMapper _mapper;

@@ -1,7 +1,12 @@
 using ApiSmartHome.Configuration;
-using ApiSmartHome.Data.Models;
+using ApiSmartHome.Contracts.Validation;
+using ApiSmartHome.Data;
 using ApiSmartHome.Data.Repository;
 using ApiSmartHome.MappingProfiles;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +27,19 @@ builder.Services.AddOptions<HomeOptions>()
     .ValidateDataAnnotations() // Можно добавить валидацию с аттрибутами данных, если нужно
 .ValidateOnStart(); // Опционально: проверка на ошибки в данных при старте приложения
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+// Регистрация сервисов репозиториев
+builder.Services.AddSingleton<IDeviceRepository, DeviceRepository>();
+builder.Services.AddSingleton<IRoomRepository, RoomRepository>();
+builder.Services.AddSingleton<IUserRepository, UserRepository>();
+
+// Настраиваем контекст базы данных
+string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<HomeApiContext>(options => options.UseSqlServer(connection), ServiceLifetime.Singleton);
+
+// Подключаем валидацию
+builder.Services.AddFluentValidationAutoValidation();
+//Это просканирует текущую сборку и зарегистрирует все валидаторы, которые наследуются от AbstractValidator<T>
+builder.Services.AddValidatorsFromAssemblyContaining<AddDeviceRequestValidator>();
 
 // Подключаем автомаппинг. Получаем все сборки, которые могут содержать Profile
 var assembly = typeof(MappingProfile).Assembly;

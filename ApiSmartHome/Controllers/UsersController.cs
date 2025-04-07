@@ -11,14 +11,14 @@ namespace ApiSmartHome.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserController : Controller
+    public class UsersController : ControllerBase
     {
-        private readonly ILogger<UserController> _logger;
+        private readonly ILogger<UsersController> _logger;
         private IMapper _mapper;
         private IUserRepository _user;
 
-        public UserController(
-            ILogger<UserController> logger, 
+        public UsersController(
+            ILogger<UsersController> logger, 
             IMapper mapper, 
             IUserRepository users)
         {
