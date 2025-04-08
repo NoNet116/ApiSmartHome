@@ -1,12 +1,6 @@
 ﻿using ApiSmartHome.Data.Models;
 using ApiSmartHome.Data.Queries;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace ApiSmartHome.Data.Repository
 {
@@ -86,6 +80,13 @@ namespace ApiSmartHome.Data.Repository
                 _context.Devices.Update(device);
 
             // Сохраняем изменения в базе 
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteDevice(Device device)
+        {
+            ArgumentNullException.ThrowIfNull(device);
+            _context.Devices.Remove(device);
             await _context.SaveChangesAsync();
         }
     }

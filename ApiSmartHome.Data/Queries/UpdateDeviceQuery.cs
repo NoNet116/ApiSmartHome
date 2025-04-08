@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ApiSmartHome.Data.Queries
+﻿namespace ApiSmartHome.Data.Queries
 {
     /// <summary>
     /// Класс для передачи дополнительных параметров при обновлении устройства

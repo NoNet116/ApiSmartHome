@@ -1,11 +1,5 @@
-﻿using ApiSmartHome.Contracts.Models.Devices;
-using ApiSmartHome.Contracts.Models.Rooms;
+﻿using ApiSmartHome.Contracts.Models.Rooms;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiSmartHome.Contracts.Validation
 {

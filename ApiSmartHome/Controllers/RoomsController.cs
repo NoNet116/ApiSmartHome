@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using ApiSmartHome.Data.Repository;
 using ApiSmartHome.Contracts.Models.Rooms;
 using ApiSmartHome.Data.Models;
-using ApiSmartHome.Data.Queries;
 
 namespace ApiSmartHome.Controllers
 {

@@ -1,11 +1,5 @@
 ﻿using ApiSmartHome.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiSmartHome.Data
 {
@@ -16,7 +10,7 @@ namespace ApiSmartHome.Data
 
         public HomeApiContext(DbContextOptions<HomeApiContext> options) : base(options)
         {
-           // Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

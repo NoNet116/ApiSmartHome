@@ -1,10 +1,6 @@
 ﻿using ApiSmartHome.Configuration;
-using ApiSmartHome.Contracts.Models.Home;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace ApiSmartHome.Controllers

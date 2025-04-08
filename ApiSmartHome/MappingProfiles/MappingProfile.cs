@@ -4,7 +4,6 @@ using ApiSmartHome.Contracts.Models.Devices;
 using ApiSmartHome.Contracts.Models.Rooms;
 using ApiSmartHome.Configuration;
 using ApiSmartHome.Data.Models;
-using ApiSmartHome.Contracts.Models.Users;
 
 
 

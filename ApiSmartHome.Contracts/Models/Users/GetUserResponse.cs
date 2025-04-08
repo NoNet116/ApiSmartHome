@@ -1,6 +1,4 @@
-﻿using ApiSmartHome.Contracts.Models.Devices;
-using ApiSmartHome.Data.Models;
-using System.Data;
+﻿using ApiSmartHome.Data.Models;
 
 namespace ApiSmartHome.Contracts.Models.Users
 {

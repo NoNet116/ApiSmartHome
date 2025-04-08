@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace ApiSmartHome.Configuration
+﻿namespace ApiSmartHome.Configuration
 {
     /// <summary>
     /// Информация о нашем доме

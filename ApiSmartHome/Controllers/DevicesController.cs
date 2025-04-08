@@ -1,15 +1,14 @@
 ﻿using ApiSmartHome.Contracts.Models.Devices;
-using ApiSmartHome.Contracts.Models.Rooms;
 using ApiSmartHome.Data.Models;
 using ApiSmartHome.Data.Queries;
 using ApiSmartHome.Data.Repository;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 
 namespace ApiSmartHome.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class DevicesController : ControllerBase
     {
@@ -31,11 +30,15 @@ namespace ApiSmartHome.Controllers
         /// </summary>
         [HttpGet]
         [Route("")]
+        [Description("Этот метод возвращает список всех устройств.")]
         public async Task<IActionResult> Info()
         {
+            _logger.LogInformation("Метод Info начал выполнение.");
+
             var devices = await _devices.GetDevices();
             if (devices == null)
             {
+                _logger.LogWarning("Нет зарегистрированных устройств.");
                 return StatusCode(200, $"Нет зарегистрированных устройств.");
             }
             var resp = new GetDevicesResponse
@@ -43,7 +46,7 @@ namespace ApiSmartHome.Controllers
                 DeviceAmount = devices.Length,
                 Devices = _mapper.Map<Device[], DeviceView[]>(devices)
             };
-
+            _logger.LogInformation($"Найдено устройств: {devices?.Length ?? 0}");
             return StatusCode(200, resp);
         }
 
@@ -73,18 +76,18 @@ namespace ApiSmartHome.Controllers
         /// Обновление существующего устройства
         /// </summary>
         [HttpPatch]
-        [Route("{id}")]
+        [Route("{id:guid}")]
         public async Task<IActionResult> Edit(
             [FromRoute] Guid id,
             [FromBody] EditDeviceRequest request)
         {
             var room = await _rooms.GetRoomById(request.NewRoomId);
             if (room == null)
-                return StatusCode(400, $"Ошибка: Комната не подключена. Сначала подключите комнату!");
+                return NotFound($"Ошибка: Комната не подключена. Сначала подключите комнату!");
 
             var device = await _devices.GetDeviceById(id);
             if (device == null)
-                return StatusCode(400, $"Ошибка: Устройство с идентификатором {id} не существует.");
+                return NotFound($"Ошибка: Устройство с идентификатором {id} не существует.");
 
             var withSameName = await _devices.GetDeviceBySN(request.NewSerial);
             if (withSameName != null)
@@ -94,6 +97,18 @@ namespace ApiSmartHome.Controllers
             );
 
             return StatusCode(200, $"Устройство обновлено! Имя - {device.Name}, Серийный номер - {device.SerialNumber},  Комната подключения - {device.Room.Name}");
+        }
+
+        [HttpDelete]
+        [Route("{id:guid}")]
+        public async Task <ActionResult> Delete([FromRoute] Guid id)
+        {
+            var device = await _devices.GetDeviceById(id);
+            if(device == null)
+                return NotFound();
+
+            await _devices.DeleteDevice(device);
+            return NoContent();
         }
 
     }
